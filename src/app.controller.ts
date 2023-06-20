@@ -1,12 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import {Controller, Get, Query} from '@nestjs/common';
+import {SendMailProducer} from "./mail/send-mail.producer";
 
-@Controller()
+@Controller('mail')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+    constructor(
+        private sendMailProducerService: SendMailProducer
+    ) {
+    }
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+    @Get('send-mail')
+    async sendMail(
+        @Query('msg') msg : string
+    ) : Promise<string>{
+        await this.sendMailProducerService.sendMail({
+            to : 'john@test.com',
+            from : 'ifa@dev.com',
+            template : 'welcome',
+            subject : 'Hello',
+            context : {
+                name : 'John Doe',
+                message : msg
+            }
+        })
+        return msg
+    }
 }

@@ -3,6 +3,24 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "assets" : ["mail/templates/**/*"]
   }
 }
+<!DOCTYPE html>
+<html>
+<body>
+<p>We are thrilled to extend an invitation for you to join our clinic as a member of {{clinicName}} as a {{roleName}} </p>
+
+<p>To confirm your membership and get started, please click on the following link: <a href="{{url}}">Confirm Membership</a></p>
+
+<p>By clicking the link, you will be directed to a page where you can complete your registration and provide any necessary information. We look forward to welcoming you to our clinic.</p>
+
+<p>Thank you for considering our invitation. We can't wait to have you on board!</p>
+
+<p>Best regards,<br>
+{{clinicName}}</p>
+</body>
+</html>
+
+
